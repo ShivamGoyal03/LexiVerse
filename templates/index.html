@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexiVerse</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>LexiVerse</h1>
+        <form id="promptForm">
+            <textarea id="prompt" name="prompt" placeholder="Enter your prompt here..." required></textarea>
+            <button type="submit">Generate</button>
+        </form>
+        <div id="response"></div>
+    </div>
+    <script>
+        document.getElementById('promptForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const prompt = document.getElementById('prompt').value;
+            const responseContainer = document.getElementById('response');
+            responseContainer.innerHTML = 'Generating...'; // Indicate that generation is in progress
+    
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: prompt }),
+            });
+    
+            const data = await response.json();
+    
+            // Clear the 'Generating...' message
+            responseContainer.innerHTML = '';
+    
+            // Create a new div element for the generated text
+            const generatedTextDiv = document.createElement('div');
+            generatedTextDiv.className = 'generated-text-box'; // Assign a class for styling
+            generatedTextDiv.innerHTML = data.response || 'Error: Could not generate content.';
+    
+            // Append the new div to the response container
+            responseContainer.appendChild(generatedTextDiv);
+        }
+    </script>
+</body>
+<footer>
+    <p>Created by <a href="https://linkedin.com/in/shivam2003" target="_blank" rel="noopener noreferrer">Shivam Goyal</a></p>
+</footer>
+</html>

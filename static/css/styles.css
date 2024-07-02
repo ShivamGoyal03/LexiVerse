@@ -1,0 +1,16 @@
+/* static/css/styles.css */
+
+.generated-content p {
+    margin-bottom: 1em; /* Adds space between paragraphs */
+}
+
+.generated-content {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+}
+
+.generated-text-box {
+    border-radius: 5px;
+}
