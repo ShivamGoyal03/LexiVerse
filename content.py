@@ -38,7 +38,7 @@ def generate_content():
         presence_penalty=float(os.environ.get("PRESENCE_PENALTY")),
         frequency_penalty=float(os.environ.get("FREQUENCY_PENALTY")),
         top_p=float(os.environ.get("TOP_P")),
-        n=int(os.environ.get("N"))
+        n=int(os.environ.get("N_VAR"))
     )
     
     # Return the generated content
